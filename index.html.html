@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=1.0, user-scalable=0, viewport-fit=cover">
+    <title>Gabi · Conteúdo Exclusivo Premium | Planos VIP</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #ffffff;
+            font-family: 'Poppins', 'Montserrat', 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ========== HERO LARANJA ========== */
+        .hero-robot {
+            background-color: #F26D21;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .hero-robot.hidden-hero {
+            display: none;
+        }
+
+        .btn-robot {
+            background-color: white;
+            color: #F26D21;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 20px 35px -8px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s;
+        }
+
+        .btn-robot:hover {
+            transform: scale(1.05);
+            background-color: #fff5e8;
+        }
+
+        .loading-robot {
+            margin-top: 2rem;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .loading-robot i {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg);}
+            100% { transform: rotate(360deg);}
+        }
+
+        /* ========== TELA DE VÍDEO OBRIGATÓRIO - FORMATO VERTICAL (CELULAR EM PÉ) ========== */
+        .video-mandatory-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(0px);
+        }
+
+        /* Container estilo celular em pé - proporção 9:16 */
+        .video-vertical-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            background: #000;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.6);
+            position: relative;
+            aspect-ratio: 9 / 16;
+        }
+
+        .video-vertical-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .video-controls-warning {
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(10px);
+            padding: 10px 16px;
+            text-align: center;
+            color: #ffaa77;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-radius: 30px;
+            margin-top: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-watch-more {
+            background: #F26D21;
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: white;
+            border-radius: 60px;
+            cursor: pointer;
+            margin-top: 28px;
+            transition: transform 0.2s, background 0.2s;
+            display: inline-block;
+            box-shadow: 0 10px 25px rgba(242,109,33,0.5);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-watch-more:hover {
+            background: #d85f1a;
+            transform: scale(1.02);
+        }
+
+        .btn-watch-more:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            background: #a04a17;
+        }
+
+        .video-message {
+            margin-top: 20px;
+            color: white;
+            font-size: 0.85rem;
+            background: rgba(0,0,0,0.6);
+            padding: 8px 18px;
+            border-radius: 40px;
+            backdrop-filter: blur(5px);
+            text-align: center;
+        }
+
+        /* ========== CONTEÚDO PRINCIPAL ========== */
+        .main-content {
+            display: none;
+            position: relative;
+        }
+
+        .blur-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(18px);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .blur-overlay .unlock-screen-btn {
+            background: #F26D21;
+            border: none;
+            padding: 18px 48px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: white;
+            border-radius: 70px;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(242,109,33,0.8);
+        }
+
+        .main-content.unlocked .blur-overlay {
+            display: none;
+        }
+
+        /* Scroll-Driven Reveal */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.15s linear, transform 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-on-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Profile */
+        .profile-header {
+            position: relative;
+            margin-bottom: 70px;
+        }
+
+        .banner-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 0 0 28px 28px;
+            background: linear-gradient(145deg, #f7b47b, #F26D21);
+        }
+
+        .stats-badge {
+            position: absolute;
+            top: 18px;
+            left: 24px;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(10px);
+            padding: 8px 18px;
+            border-radius: 60px;
+            display: flex;
+            gap: 22px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: white;
+            z-index: 5;
+        }
+
+        .profile-pic-wrapper {
+            position: absolute;
+            bottom: -50px;
+            left: 30px;
+            z-index: 10;
+        }
+
+        .profile-pic {
+            width: 110px;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .profile-info {
+            margin-top: 60px;
+            padding-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        .name-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .name-row h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1e1e2a;
+        }
+
+        .verified-icon {
+            color: #F26D21;
+            font-size: 1.6rem;
+        }
+
+        .username {
+            color: #5a5a6e;
+            margin-top: 4px;
+        }
+
+        .bio {
+            background: #faf9fc;
+            padding: 20px 28px;
+            border-radius: 32px;
+            margin: 20px 0 20px;
+            border: 1px solid #f0eef2;
+        }
+
+        .featured-image {
+            width: 100%;
+            margin: 0 0 30px 0;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: auto;
+            max-height: 550px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .featured-image:hover img {
+            transform: scale(1.02);
+        }
+
+        .exclusive-preview {
+            margin: 40px 0 50px;
+            position: relative;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+        }
+
+        .video-thumb {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            filter: blur(8px);
+        }
+
+        .overlay-play {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(2px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .btn-unlock {
+            background: #F26D21;
+            border: none;
+            padding: 14px 32px;
+            font-weight: 700;
+            border-radius: 60px;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .plans-section {
+            margin: 50px 0 40px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            background: linear-gradient(135deg, #F26D21, #f5904a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 30px;
+        }
+
+        .plans-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 28px;
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: 32px;
+            padding: 28px 24px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08);
+            transition: all 0.25s ease;
+            border: 1px solid #f0eef2;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 28px 40px -12px rgba(242,109,33,0.25);
+        }
+
+        .popular {
+            border-top: 5px solid #F26D21;
+            background: #fffaf5;
+            position: relative;
+        }
+
+        .badge-popular {
+            background: #F26D21;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin: 20px 0 10px;
+        }
+
+        .price span {
+            font-size: 1rem;
+        }
+
+        .plan-content {
+            background: #fff5ed;
+            border-radius: 24px;
+            padding: 15px 12px;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .plan-content p {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #b6490e;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px dashed #ffd8c4;
+            padding-bottom: 6px;
+        }
+
+        .plan-content ul {
+            list-style: none;
+            padding-left: 8px;
+        }
+
+        .plan-content li {
+            font-size: 0.8rem;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #2d2d3a;
+        }
+
+        .plan-content li i {
+            color: #F26D21;
+            width: 20px;
+            font-size: 0.9rem;
+        }
+
+        .whatsapp-highlight {
+            background: #25D36620;
+            border-radius: 16px;
+            padding: 8px;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: 700;
+            color: #075E54;
+            font-size: 0.75rem;
+        }
+
+        .btn-assinar {
+            background: #F26D21;
+            color: white;
+            width: 100%;
+            padding: 14px 0;
+            font-weight: 700;
+            border-radius: 60px;
+            display: inline-block;
+            text-decoration: none;
+            animation: pulse 1.5s infinite ease-in-out;
+            transition: 0.2s;
+            margin-top: 15px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(242,109,33,0.7); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(242,109,33,0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(242,109,33,0); }
+        }
+
+        .urgency-badge {
+            background: #fff0e6;
+            border-radius: 30px;
+            padding: 6px 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #b6490e;
+            margin-top: 12px;
+        }
+
+        .carousel-area {
+            margin: 60px 0 40px;
+        }
+
+        .carousel-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            background: linear-gradient(120deg, #F26D21, #f7b47b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .carousel-wrapper {
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            display: flex;
+            gap: 20px;
+            padding-bottom: 20px;
+            scroll-behavior: smooth;
+        }
+
+        .carousel-item {
+            flex: 0 0 280px;
+            scroll-snap-align: start;
+            border-radius: 28px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.2s ease;
+            background: white;
+            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+        }
+
+        .carousel-item.scroll-zoom {
+            transform: scale(1.02);
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            pointer-events: none;
+            transition: transform 0.2s ease, filter 0.2s ease;
+            display: block;
+        }
+
+        .carousel-item.scroll-zoom img {
+            filter: blur(1.5px);
+            transform: scale(1.03);
+        }
+
+        .free-badge {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            background: #F26D21;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            z-index: 2;
+        }
+
+        .carousel-buy-btn {
+            display: block;
+            background: #F26D21;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.2s;
+            border-top: 1px solid #ffe0cc;
+        }
+
+        .faq-section {
+            background: #fef9f5;
+            border-radius: 40px;
+            padding: 40px 30px;
+            margin: 50px 0 30px;
+        }
+
+        .faq-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 24px;
+            padding: 18px 24px;
+            margin-bottom: 16px;
+            cursor: pointer;
+        }
+
+        .faq-question {
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s;
+            color: #5a5a6e;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            margin-top: 12px;
+        }
+
+        .vip-email-note {
+            background: #F26D21;
+            border-radius: 32px;
+            padding: 18px;
+            text-align: center;
+            color: white;
+            font-weight: 600;
+            margin: 30px 0 20px;
+        }
+
+        .testimonials-btn {
+            text-align: center;
+            margin: 20px 0 40px;
+        }
+
+        .btn-testimonials {
+            background: #F26D21;
+            border: none;
+            padding: 16px 36px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 60px;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .testimonials-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #F26D21;
+            z-index: 1000;
+            overflow-y: auto;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        .testimonials-modal.active {
+            display: flex;
+        }
+
+        .modal-header {
+            width: 100%;
+            max-width: 700px;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .back-to-site-btn {
+            background: white;
+            color: #F26D21;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .testimonials-grid {
+            max-width: 1100px;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 28px;
+            margin-top: 20px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 32px;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .testimonial-card.scroll-zoom {
+            transform: scale(1.02);
+        }
+
+        .testimonial-card img {
+            width: 100%;
+            border-radius: 24px;
+            pointer-events: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #aaa;
+        }
+
+        @media (max-width: 700px) {
+            .stats-badge { font-size: 0.7rem; gap: 12px; }
+            .profile-pic { width: 85px; height: 85px; }
+            .plan-card { width: 280px; }
+            .btn-watch-more { font-size: 1.2rem; padding: 12px 32px; }
+            .video-vertical-container { max-width: 340px; border-radius: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO LARANJA -->
+    <div id="heroSection" class="hero-robot">
+        <button id="robotButton" class="btn-robot">🤖 NÃO SOU UM ROBÔ</button>
+        <div id="robotLoading" style="display: none;" class="loading-robot">
+            <i class="fas fa-circle-notch"></i> Verificando acesso...
+        </div>
+    </div>
+
+    <!-- TELA DE VÍDEO OBRIGATÓRIO - FORMATO VERTICAL (CELULAR EM PÉ) -->
+    <div id="videoMandatoryScreen" style="display: none;" class="video-mandatory-screen">
+        <div class="video-vertical-container">
+            <video id="mandatoryVideo" controls disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback" preload="auto" playsinline>
+                <!-- ATENÇÃO: Substitua pelo link do seu vídeo VERTICAL (9:16) -->
+                <source src="th.mp4">
+                Seu navegador não suporta vídeo.
+            </video>
+        </div>
+        <div class="video-controls-warning">
+            <i class="fas fa-mobile-alt"></i> Modo vertical · Assista até o final
+        </div>
+        <button id="watchMoreBtn" class="btn-watch-more" disabled>🔒 QUERO VER MAIS</button>
+        <div class="video-message" id="videoMsg">🎬 Vídeo obrigatório (formato exclusivo) - assista até o fim</div>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div id="mainContent" class="main-content">
+        <div id="screenBlurOverlay" class="blur-overlay">
+            <button id="unlockScreenBtn" class="unlock-screen-btn">
+                <i class="fas fa-unlock-alt"></i> LIBERAR CONTEÚDO
+            </button>
+            <p><i class="fas fa-eye-slash"></i> Tela bloqueada · Apenas membros verificados</p>
+        </div>
+
+        <div class="content-inner">
+            <div class="profile-header">
+                <img src="08.jpeg" alt="banner" class="banner-img">
+                <div class="stats-badge">
+                    <span><i class="fas fa-video"></i> 547</span>
+                    <span><i class="fas fa-camera"></i> 236</span>
+                    <span><i class="fas fa-heart"></i> 103.1K</span>
+                </div>
+                <div class="profile-pic-wrapper">
+                    <img src="07.jpg" alt="GABI" class="profile-pic">
+                </div>
+            </div>
+
+            <div class="container" style="max-width:1280px; margin:0 auto; padding:0 20px;">
+                <div class="profile-info reveal-on-scroll">
+                    <div class="name-row">
+                        <h1>GABI</h1>
+                        <i class="fas fa-check-circle verified-icon"></i>
+                    </div>
+                    <div class="username">@GABI</div>
+                </div>
+
+                <div class="bio reveal-on-scroll">
+                    <p>🔥 prazer, meu nome é GABI, e já estou ansiosa para te deixar todo molhado com os meus vídeos safadinhos... APOS A COMPRA VENHA ME CONHECER MELHOR (FAÇO PROGRAMAS COM OS MEUS CLIENTES DE GRAÇA)...... 😈💋</p>
+                    <div class="urgency-badge"><i class="fas fa-fire"></i> ACESSO LIMITADO HOJE</div>
+                </div>
+
+                <div class="featured-image reveal-on-scroll">
+                    <img src="15.jpg" alt="GABI conteúdo exclusivo">
+                </div>
+
+                <div class="exclusive-preview reveal-on-scroll" id="previewBlock">
+                    <img class="video-thumb" src="09.jpg" alt="premium preview">
+                    <div class="overlay-play">
+                        <i class="fas fa-lock"></i>
+                        <a href="https://seguroamplopay.com/checkout/cmnzg9nxc01gf1rqr6ur5yjt5?offer=277A3TY" target="_blank" id="unlockPreviewBtn" class="btn-unlock">🔓 Desbloquear conteúdo (R$100,90)</a>
+                    </div>
+                </div>
+
+                <div class="plans-section reveal-on-scroll">
+                    <h2 class="section-title">✨ Escolha seu acesso VIP ✨</h2>
+                    <div class="plans-grid">
+                        <div class="plan-card">
+                            <h3>🔥 DIÁRIO</h3>
+                            <div class="price">R$25,90 <span>/dia</span></div>
+                            <div class="plan-content">
+                                <p><i class="fas fa-gift"></i> O que você recebe:</p>
+                                <ul><li><i class="fas fa-camera"></i> 10 fotos exclusivas</li><li><i class="fas fa-video"></i> 3 vídeos quentes</li><li><i class="fas fa-heart"></i> Conteúdo +18 liberado na hora</li></ul>
+                                <div class="whatsapp-highlight" style="background:#ffe0cc;"><i class="fas fa-lock-open"></i> Acesso imediato ao pack diário</div>
+                            </div>
+                            <a href="https://seguroamplopay.com/checkout/cmnzg1y5r00ut1yqrquk32l6u?offer=CAX2AJC" target="_blank" class="btn-assinar">Assinar agora</a>
+                        </div>
+                        <div class="plan-card popular">
+                            <div class="badge-popular">⭐ MAIS POPULAR</div>
+                            <h3>💎 MENSAL</h3>
+                            <div class="price">R$50,90 <span>/mês</span></div>
+                            <div class="plan-content">
+                                <p><i class="fas fa-gift"></i> Conteúdo completo:</p>
+                                <ul><li><i class="fas fa-video"></i> 30 vídeos exclusivos</li><li><i class="fas fa-camera"></i> 19 fotos sensuais</li><li><i class="fas fa-play-circle"></i> Vídeos transando, mamando e dançando peladinha 🔥</li></ul>
+                                <div class="whatsapp-highlight"><i class="fab fa-hotjar"></i> Conteúdo explícito + atualizações semanais</div>
+                            </div>
+                            <a href="https://seguroamplopay.com/checkout/cmnzg7heh01g51rqr3ei5eb0r?offer=B0P348C" target="_blank" class="btn-assinar">Assinar agora</a>
+                        </div>
+                        <div class="plan-card">
+                            <h3>♾️ VITALÍCIO</h3>
+                            <div class="price">R$100,90 <span>/único</span></div>
+                            <div class="plan-content">
+                                <p><i class="fas fa-crown"></i> Pacote vitalício completo:</p>
+                                <ul><li><i class="fas fa-video"></i> 100 vídeos quentes</li><li><i class="fas fa-camera"></i> 40 fotos explícitas</li><li><i class="fab fa-whatsapp"></i> <strong>MEU WHATSAPP PESSOAL</strong></li></ul>
+                                <div class="whatsapp-highlight" style="background:#25D36620;"><i class="fab fa-whatsapp"></i> Contato direto comigo</div>
+                            </div>
+                            <a href="https://seguroamplopay.com/checkout/cmnzg9nxc01gf1rqr6ur5yjt5?offer=277A3TY" target="_blank" class="btn-assinar">Assinar agora</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-area reveal-on-scroll">
+                    <div class="carousel-title">🔥 Amostras exclusivas 🔥</div>
+                    <div class="carousel-wrapper">
+                        <div class="carousel-item"><img src="11.jpg" alt="amostra"><div class="free-badge">AMOSTRA VIP</div><a href="https://seguroamplopay.com/checkout/cmnzg9nxc01gf1rqr6ur5yjt5?offer=277A3TY" target="_blank" class="carousel-buy-btn">Comprar conteúdo</a></div>
+                        <div class="carousel-item"><img src="09.jpg" alt="amostra"><div class="free-badge">AMOSTRA VIP</div><a href="https://seguroamplopay.com/checkout/cmnzg9nxc01gf1rqr6ur5yjt5?offer=277A3TY" target="_blank" class="carousel-buy-btn">Comprar conteúdo</a></div>
+                        <div class="carousel-item"><img src="10.jpg" alt="amostra"><div class="free-badge">AMOSTRA VIP</div><a href="https://seguroamplopay.com/checkout/cmnzg9nxc01gf1rqr6ur5yjt5?offer=277A3TY" target="_blank" class="carousel-buy-btn">Comprar conteúdo</a></div>
+                        <div class="carousel-item"><img src="12.jpg" alt="amostra"><div class="free-badge">AMOSTRA VIP</div><a href="https://seguroamplopay.com/checkout/cmnzg9nxc01gf1rqr6ur5yjt5?offer=277A3TY" target="_blank" class="carousel-buy-btn">Comprar conteúdo</a></div>
+                        <div class="carousel-item"><img src="13.jpg" alt="amostra"><div class="free-badge">AMOSTRA VIP</div><a href="https://seguroamplopay.com/checkout/cmnzg9nxc01gf1rqr6ur5yjt5?offer=277A3TY" target="_blank" class="carousel-buy-btn">Comprar conteúdo</a></div>
+                        <div class="carousel-item"><img src="14.jpg" alt="amostra"><div class="free-badge">AMOSTRA VIP</div><a href="https://seguroamplopay.com/checkout/cmnzg9nxc01gf1rqr6ur5yjt5?offer=277A3TY" target="_blank" class="carousel-buy-btn">Comprar conteúdo</a></div>
+                    </div>
+                </div>
+
+                <div class="faq-section reveal-on-scroll">
+                    <div class="faq-title"><i class="fas fa-question-circle"></i> Tire suas dúvidas</div>
+                    <div class="faq-item"><div class="faq-question">Como funciona o acesso? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Após o pagamento, você recebe no e-mail o link do Grupo VIP com todo o conteúdo exclusivo.</div></div>
+                    <div class="faq-item"><div class="faq-question">O pagamento é seguro? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Sim, utilizamos Amplopay, criptografia total.</div></div>
+                    <div class="faq-item"><div class="faq-question">Recebo o link na hora? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Sim! Após a confirmação, seu e-mail recebe o acesso VIP.</div></div>
+                    <div class="vip-email-note"><i class="fas fa-envelope-open-text"></i> <strong>Importante:</strong> Após o pagamento você receberá um e-mail com o link do Grupo VIP + WhatsApp no plano vitalício.</div>
+                </div>
+
+                <div class="testimonials-btn reveal-on-scroll">
+                    <button id="showTestimonialsBtn" class="btn-testimonials"><i class="fas fa-users"></i> Ver clientes satisfeitos</button>
+                </div>
+                <footer>© GABI EXCLUSIVE · Conteúdo +18 explícito</footer>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DEPOIMENTOS -->
+    <div id="testimonialsModal" class="testimonials-modal">
+        <div class="modal-header">
+            <button id="backToSiteBtn" class="back-to-site-btn"><i class="fas fa-arrow-left"></i> Voltar para o site</button>
+        </div>
+        <h2 style="color:white; margin-bottom:25px;"><i class="fas fa-star"></i> Clientes satisfeitos</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card"><img src="01.png" alt="cliente"></div>
+            <div class="testimonial-card"><img src="02.png" alt="cliente"></div>
+            <div class="testimonial-card"><img src="03.png" alt="cliente"></div>
+            <div class="testimonial-card"><img src="04.png" alt="cliente"></div>
+            <div class="testimonial-card"><img src="05.png" alt="cliente"></div>
+            <div class="testimonial-card"><img src="06.png" alt="cliente"></div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const heroDiv = document.getElementById('heroSection');
+            const mainDiv = document.getElementById('mainContent');
+            const robotBtn = document.getElementById('robotButton');
+            const robotLoadingSpan = document.getElementById('robotLoading');
+            const videoScreen = document.getElementById('videoMandatoryScreen');
+            const mandatoryVideo = document.getElementById('mandatoryVideo');
+            const watchMoreBtn = document.getElementById('watchMoreBtn');
+            const blurOverlay = document.getElementById('screenBlurOverlay');
+            const unlockScreenButton = document.getElementById('unlockScreenBtn');
+
+            let videoFinished = false;
+
+            function preventSpeedAndSeek(video) {
+                video.addEventListener('ratechange', () => { if(video.playbackRate !== 1.0) video.playbackRate = 1.0; });
+                let lastTime = 0;
+                video.addEventListener('seeking', () => {
+                    if(!videoFinished && video.currentTime < video.duration - 0.3) {
+                        if(Math.abs(video.currentTime - lastTime) > 0.8 && lastTime !== 0) video.currentTime = lastTime;
+                        else lastTime = video.currentTime;
+                    }
+                });
+                setInterval(() => { if(video && !videoFinished) lastTime = video.currentTime; }, 300);
+                video.addEventListener('contextmenu', (e) => e.preventDefault());
+            }
+
+            robotBtn.addEventListener('click', () => {
+                robotLoadingSpan.style.display = 'inline-flex';
+                robotBtn.disabled = true;
+                setTimeout(() => {
+                    heroDiv.classList.add('hidden-hero');
+                    videoScreen.style.display = 'flex';
+                    videoFinished = false;
+                    watchMoreBtn.disabled = true;
+                    watchMoreBtn.innerHTML = "🔒 QUERO VER MAIS";
+                    mandatoryVideo.load();
+                    mandatoryVideo.currentTime = 0;
+                    mandatoryVideo.playbackRate = 1.0;
+                    mandatoryVideo.play().catch(e => console.log("autoplay bloqueado"));
+                    
+                    const onEnded = () => {
+                        videoFinished = true;
+                        watchMoreBtn.disabled = false;
+                        watchMoreBtn.innerHTML = "✨ QUERO VER MAIS ✨";
+                        document.getElementById('videoMsg').innerHTML = "✅ Vídeo assistido! Clique no botão laranja para continuar.";
+                        mandatoryVideo.removeEventListener('ended', onEnded);
+                    };
+                    mandatoryVideo.addEventListener('ended', onEnded);
+                    preventSpeedAndSeek(mandatoryVideo);
+                    robotLoadingSpan.style.display = 'none';
+                    robotBtn.disabled = false;
+                }, 1600);
+            });
+
+            watchMoreBtn.addEventListener('click', () => {
+                if(!videoFinished) { alert("Assista o vídeo até o final para desbloquear!"); return; }
+                videoScreen.style.display = 'none';
+                mainDiv.style.display = 'block';
+                if(blurOverlay) blurOverlay.style.display = 'flex';
+                mainDiv.classList.remove('unlocked');
+                mainDiv.scrollIntoView({ behavior: 'smooth' });
+                initScrollAnimations();
+            });
+
+            if(unlockScreenButton && blurOverlay) {
+                unlockScreenButton.addEventListener('click', () => {
+                    unlockScreenButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Liberando...';
+                    unlockScreenButton.disabled = true;
+                    setTimeout(() => {
+                        blurOverlay.style.display = 'none';
+                        mainDiv.classList.add('unlocked');
+                        const toast = document.createElement('div');
+                        toast.innerText = '✨ Tela liberada! Conteúdos picantes liberados ✨';
+                        toast.style.cssText = 'position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:#F26D21; color:white; padding:12px 24px; border-radius:40px; font-weight:bold; z-index:1001';
+                        document.body.appendChild(toast);
+                        setTimeout(() => toast.remove(), 3500);
+                    }, 800);
+                });
+            }
+
+            function initScrollAnimations() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(e => e.isIntersecting ? e.target.classList.add('revealed') : e.target.classList.remove('revealed'));
+                }, { threshold: 0.25 });
+                document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+                const zoomObs = new IntersectionObserver((entries) => {
+                    entries.forEach(e => e.isIntersecting ? e.target.classList.add('scroll-zoom') : e.target.classList.remove('scroll-zoom'));
+                }, { threshold: 0.4 });
+                document.querySelectorAll('.carousel-item, .testimonial-card').forEach(el => zoomObs.observe(el));
+            }
+
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.querySelector('.faq-question').addEventListener('click', () => item.classList.toggle('active'));
+            });
+
+            const modal = document.getElementById('testimonialsModal');
+            const showBtn = document.getElementById('showTestimonialsBtn');
+            const backBtn = document.getElementById('backToSiteBtn');
+            if(showBtn && modal && backBtn) {
+                showBtn.addEventListener('click', () => {
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+                backBtn.addEventListener('click', () => {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+                modal.addEventListener('click', (e) => { if(e.target === modal) { modal.classList.remove('active'); document.body.style.overflow = ''; } });
+            }
+        })();
+    </script>
+</body>
+</html>
